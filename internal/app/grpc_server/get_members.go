@@ -9,7 +9,7 @@ import (
 func (s *ChatGRPCServer) GetMembers(ctx context.Context, req *pb.GetMembersRequest) (*pb.GetMembersResponse, error) {
 	chatID := req.ChatId
 
-	members, err := s.usecase.GetMembers(ctx, chatID)
+	members, err := s.service.GetMembers(ctx, chatID)
 	if err != nil {
 		return nil, err
 	}

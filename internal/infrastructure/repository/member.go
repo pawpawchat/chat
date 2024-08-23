@@ -37,3 +37,14 @@ func (s *MemberRepository) GetMembers(ctx context.Context, chatID uint64) (*[]mo
 	members := new([]model.Member)
 	return members, s.db.SelectContext(ctx, members, sql, args...)
 }
+
+func (s *MemberRepository) GetMember(ctx context.Context, chatID uint64, memberID uint64) (*model.Member, error) {
+	sql, args := squirrel.Select("*").
+		From("chat_members").
+		Where(squirrel.Eq{"chat_id": chatID, "member_id": memberID}).
+		PlaceholderFormat(squirrel.Dollar).
+		MustSql()
+
+	member := new(model.Member)
+	return member, s.db.GetContext(ctx, member, sql, args...)
+}

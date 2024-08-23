@@ -4,7 +4,6 @@ import (
 	"context"
 	"flag"
 	"log"
-	"log/slog"
 	"os"
 	"os/signal"
 	"syscall"
@@ -31,8 +30,5 @@ func main() {
 		cancel()
 	}()
 
-	if err := app.Run(ctx, cfg); err != nil {
-		slog.Error("app was terminated with an error", "err", err)
-		os.Exit(1)
-	}
+	app.Run(ctx, cfg)
 }

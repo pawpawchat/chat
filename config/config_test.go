@@ -19,8 +19,9 @@ func TestLoadConfig(t *testing.T) {
 	assert.NoError(t, err)
 
 	assert.NotNil(t, config)
-	assert.NotEmpty(t, config.Env().GRPC_SERVER_ADDR)
-	assert.NotEmpty(t, config.Env().DB_URL)
+	assert.NotEmpty(t, config.Env().GRPCServerAddr)
+	assert.NotEmpty(t, config.Env().WebSocketAddr)
+	assert.NotEmpty(t, config.Env().DbUrl)
 }
 
 func TestLoadDefaultConfig(t *testing.T) {
@@ -31,8 +32,8 @@ func TestLoadDefaultConfig(t *testing.T) {
 	assert.NoError(t, err)
 
 	assert.NotNil(t, config)
-	assert.NotEmpty(t, config.Env().GRPC_SERVER_ADDR)
-	assert.NotEmpty(t, config.Env().DB_URL)
+	assert.NotEmpty(t, config.Env().GRPCServerAddr)
+	assert.NotEmpty(t, config.Env().DbUrl)
 }
 
 func TestConfigureLogger(t *testing.T) {
@@ -44,7 +45,7 @@ func TestConfigureLogger(t *testing.T) {
 	config, err := LoadConfig(wd + "/../config.yaml")
 	assert.NoError(t, err)
 
-	assert.NotNil(t, config, config.Env().GRPC_SERVER_ADDR)
+	assert.NotNil(t, config, config.Env().GRPCServerAddr)
 
 	assert.NoError(t, ConfigureLogger(config))
 }

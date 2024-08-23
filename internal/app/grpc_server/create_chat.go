@@ -15,7 +15,7 @@ func (s *ChatGRPCServer) CreateChat(ctx context.Context, req *pb.CreateChatReque
 		return nil, err
 	}
 
-	if err := s.usecase.CreateChat(ctx, owner, chat); err != nil {
+	if err := s.service.CreateChat(ctx, owner, chat); err != nil {
 		return nil, err
 	}
 

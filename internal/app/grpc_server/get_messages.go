@@ -11,7 +11,7 @@ import (
 func (s *ChatGRPCServer) GetMessages(ctx context.Context, req *pb.GetMessagesRequest) (*pb.GetMessagesResponse, error) {
 	chatID := req.ChatId
 
-	messages, err := s.usecase.GetMessages(ctx, chatID)
+	messages, err := s.service.GetMessages(ctx, chatID)
 	if err != nil {
 		return nil, err
 	}

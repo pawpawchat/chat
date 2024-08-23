@@ -13,7 +13,7 @@ func (s *ChatGRPCServer) AddMember(ctx context.Context, req *pb.AddMemberRequest
 		return nil, err
 	}
 
-	if err := s.usecase.AddMember(ctx, user); err != nil {
+	if err := s.service.AddMember(ctx, user); err != nil {
 		return nil, err
 	}
 

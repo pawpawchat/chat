@@ -50,3 +50,8 @@ jobs:
         env:
           DB_TEST_URL: ${{ secrets.DB_URL }}
         run: go test ./...
+      
+      - name: Run build
+        env:
+          DB_TEST_URL: ${{ secrets.DB_URL }}
+        run: go build -v -a ./...

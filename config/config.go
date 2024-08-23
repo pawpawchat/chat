@@ -23,9 +23,10 @@ type Config struct {
 }
 
 type Environment struct {
-	GRPC_SERVER_ADDR string `yaml:"grpc_server_addr"`
-	LOG_LEVEL        string `yaml:"log_level"`
-	DB_URL           string `yaml:"database_url"`
+	GRPCServerAddr string `yaml:"GRPCServerAddr"`
+	LogLevel       string `yaml:"LogLevel"`
+	DbUrl          string `yaml:"database_url"`
+	WebSocketAddr  string `yaml:"websocket_server_addr"`
 }
 
 func (c *Config) Env() *Environment {
@@ -64,7 +65,7 @@ func loadConfigFile(file io.Reader) (*Config, error) {
 	}
 
 	for i := range config.Environment {
-		config.Environment[i].DB_URL = os.ExpandEnv(config.Environment[i].DB_URL)
+		config.Environment[i].DbUrl = os.ExpandEnv(config.Environment[i].DbUrl)
 	}
 
 	return config, nil
@@ -95,7 +96,7 @@ func findDefaultConfigFiles() (*os.File, error) {
 }
 
 func ConfigureLogger(config *Config) error {
-	switch config.Env().LOG_LEVEL {
+	switch config.Env().LogLevel {
 	case "error":
 		slog.SetLogLoggerLevel(slog.LevelError)
 
@@ -106,7 +107,7 @@ func ConfigureLogger(config *Config) error {
 		slog.SetLogLoggerLevel(slog.LevelInfo)
 
 	default:
-		return fmt.Errorf("undefined log level: %s", config.Env().LOG_LEVEL)
+		return fmt.Errorf("undefined log level: %s", config.Env().LogLevel)
 	}
 
 	return nil

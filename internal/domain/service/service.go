@@ -14,6 +14,7 @@ type ChatRepository interface {
 
 type MemberRepository interface {
 	AddMember(context.Context, *model.Member) error
+	GetMember(context.Context, uint64, uint64) (*model.Member, error)
 	GetMembers(context.Context, uint64) (*[]model.Member, error)
 }
 
@@ -30,8 +31,9 @@ type Service struct {
 	msgRepo    MessageRepository
 	chatRepo   ChatRepository
 	memberRepo MemberRepository
+	msgChan    chan *model.Message
 }
 
-func New(me MessageRepository, ch ChatRepository, mb MemberRepository) *Service {
-	return &Service{msgRepo: me, chatRepo: ch, memberRepo: mb}
+func New(me MessageRepository, ch ChatRepository, mb MemberRepository, mch chan *model.Message) *Service {
+	return &Service{msgRepo: me, chatRepo: ch, memberRepo: mb, msgChan: mch}
 }

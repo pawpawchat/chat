@@ -11,7 +11,7 @@ import (
 func (s *ChatGRPCServer) GetChat(ctx context.Context, req *pb.GetChatRequest) (*pb.GetChatResponse, error) {
 	chatID, _ := req.ChatId, req.MemberId
 
-	chat, err := s.usecase.GetChat(ctx, chatID)
+	chat, err := s.service.GetChat(ctx, chatID)
 	if err != nil {
 		return nil, err
 	}

@@ -14,21 +14,90 @@ func TestMessageRepository_SendMessage(t *testing.T) {
 	db := testingContext(t)
 	defer db.Close()
 
-	mr := repository.NewMessageRepository(db)
-	msg := testMessage()
+	chat, _ := addTestChat(db)
 
-	assert.NoError(t, mr.SendMessage(context.Background(), msg))
+	testCases := []struct {
+		desc  string
+		msg   func() *model.Message
+		valid bool
+	}{
+		{
+			"Chat exists",
+			func() *model.Message {
+				msg := testMessage()
+				msg.ChatID = chat.ChatID
+				return msg
+			},
+			true,
+		},
+		{
+			"Chat doesn't exists",
+			func() *model.Message {
+				msg := testMessage()
+				msg.ChatID = 0
+				return msg
+			},
+			false,
+		},
+	}
+
+	mr := repository.NewMessageRepository(db)
+
+	for _, tc := range testCases {
+		t.Run(tc.desc, func(t *testing.T) {
+			// running query
+			err := mr.SendMessage(context.Background(), tc.msg())
+			// check expectations
+			switch tc.valid {
+			case true:
+				assert.NoError(t, err)
+			case false:
+				assert.Error(t, err)
+			}
+		})
+	}
 }
 
 func TestMessageRepository_GetMessages(t *testing.T) {
 	db := testingContext(t)
 	defer db.Close()
 
-	mr := repository.NewMessageRepository(db)
-	msgs, err := mr.GetMessages(context.TODO(), 1)
+	chat, _ := addTestChat(db)
 
-	assert.NoError(t, err)
-	assert.NotNil(t, msgs)
+	testCases := []struct {
+		desc   string
+		chatID uint64
+		valid  bool
+	}{
+		{
+			"Chat exists",
+			chat.ChatID,
+			true,
+		},
+		{
+			"Chat doesn't exist",
+			0,
+			false,
+		},
+	}
+
+	mr := repository.NewMessageRepository(db)
+
+	for _, tc := range testCases {
+		t.Run(tc.desc, func(t *testing.T) {
+			// running query
+			msgs, err := mr.GetMessages(context.Background(), tc.chatID)
+			// check expectations
+			switch tc.valid {
+			case true:
+				assert.NoError(t, err)
+				assert.NotNil(t, msgs)
+			case false:
+				assert.Empty(t, msgs)
+			}
+		})
+	}
+
 }
 
 func testMessage() *model.Message {

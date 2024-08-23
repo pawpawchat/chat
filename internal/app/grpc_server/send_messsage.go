@@ -15,7 +15,7 @@ func (s *ChatGRPCServer) SendMessage(ctx context.Context, req *pb.SendMessageReq
 		return nil, err
 	}
 
-	if err := s.usecase.SendMessage(ctx, msg); err != nil {
+	if err := s.service.SendMessage(ctx, msg); err != nil {
 		return nil, err
 	}
 

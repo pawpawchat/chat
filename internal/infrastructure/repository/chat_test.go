@@ -48,6 +48,50 @@ func TestChatRepository_CreateChat(t *testing.T) {
 	assert.NotZero(t, chat.ChatID)
 }
 
+func TestChatRepository_GetChat(t *testing.T) {
+	db := testingContext(t)
+	defer db.Close()
+
+	// test data
+	chat := testChat()
+	repository.NewChatRepository(db).CreateChat(context.Background(), chat)
+
+	testCases := []struct {
+		desc   string
+		chatID uint64
+		valid  bool
+	}{
+		{
+			"Chat exists",
+			chat.ChatID,
+			true,
+		},
+		{
+			"Chat doesn't exist",
+			0,
+			false,
+		},
+	}
+
+	cr := repository.NewChatRepository(db)
+
+	for _, tc := range testCases {
+		t.Run(tc.desc, func(t *testing.T) {
+			// running query
+			chat, err := cr.GetChat(context.Background(), tc.chatID)
+			// check expectations
+			switch tc.valid {
+			case true:
+				assert.NoError(t, err)
+				assert.NotNil(t, chat)
+			case false:
+				assert.Error(t, err)
+			}
+		})
+	}
+
+}
+
 func testingContext(t *testing.T) *sqlx.DB {
 	flag.Set("env", "testing")
 	flag.Parse()
@@ -55,22 +99,10 @@ func testingContext(t *testing.T) *sqlx.DB {
 	config, err := config.LoadDefaultConfig()
 	assert.NoError(t, err)
 
-	db, err := sqlx.Open("pgx", config.Env().DB_URL)
+	db, err := sqlx.Open("pgx", config.Env().DbUrl)
 	assert.NoError(t, err)
 
 	return db
-}
-
-func TestChatRepository_GetChat(t *testing.T) {
-	db := testingContext(t)
-	defer db.Close()
-
-	cr := repository.NewChatRepository(db)
-
-	chat, err := cr.GetChat(context.Background(), 1)
-
-	assert.NoError(t, err)
-	assert.NotNil(t, chat)
 }
 
 func testChat() *model.Chat {
