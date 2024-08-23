@@ -1,0 +1,46 @@
+syntax = "proto3";
+option go_package = "api/pb";
+
+
+import "google/protobuf/timestamp.proto";
+
+
+message CreateChatRequest {
+    string title = 1;
+    uint64 owner_id = 2;
+    string owner_username = 3;
+    google.protobuf.Timestamp created_at = 4;
+}
+
+
+message GetChatRequest {
+    uint64 chat_id = 1;
+    uint64 member_id = 2;
+}
+
+
+message AddMemberRequest {
+    uint64 chat_id = 1;
+    uint64 member_id = 2;
+    string username = 3;
+    string role = 4;
+}
+
+
+message SendMessageRequest {
+    uint64 chat_id = 1;
+    uint64 sender_id = 2;
+    string sender_username = 3;
+    string body = 4;
+    google.protobuf.Timestamp sent_at = 5;
+}
+
+
+message GetMembersRequest {
+    uint64 chat_id = 1;
+}
+
+
+message GetMessagesRequest {
+    uint64 chat_id = 1;
+}

@@ -1,0 +1,38 @@
+syntax = "proto3";
+option go_package = "api/pb";
+
+import "google/protobuf/timestamp.proto";
+
+
+message Chat {
+    uint64 chat_id = 1;
+    string title = 2;
+    int32 number_members = 3;
+    google.protobuf.Timestamp created_at = 4; 
+}
+
+
+message Message {
+    uint64 message_id = 1;
+    uint64 chat_id = 2;
+    uint64 sender_id = 3;
+    string username = 4;
+    string body = 5;
+    bool is_deleted = 6;
+    google.protobuf.Timestamp sent_at = 7;    
+}
+
+
+message Member {
+    uint64 member_id = 1;
+    string username = 2;
+    uint64 chat_id = 3;
+    string role = 4;
+}
+
+
+// message MessageReaders {
+//     uint64 message_id = 1;
+//     repeated uint64 reader_id = 2;
+// }
+

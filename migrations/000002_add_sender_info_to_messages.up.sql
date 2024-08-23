@@ -1,0 +1,3 @@
+ALTER TABLE messages 
+ADD COLUMN sender_id BIGINT NOT NULL,
+ADD COLUMN sender_username VARCHAR(16) NOT NULL;
