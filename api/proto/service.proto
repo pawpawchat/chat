@@ -1,0 +1,18 @@
+syntax = "proto3";
+option go_package = "api/pb";
+
+import "request.proto";
+import "response.proto";
+
+
+service ChatService {
+    rpc CreateChat(CreateChatRequest) returns (CreateChatResponse);
+    rpc GetChat(GetChatRequest) returns (GetChatResponse);
+    
+    rpc AddMember(AddMemberRequest) returns (AddMemberResponse);
+    rpc GetMembers(GetMembersRequest) returns (GetMembersResponse);
+
+
+    rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
+    rpc GetMessages(GetMessagesRequest) returns (GetMessagesResponse);
+}

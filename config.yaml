@@ -1,0 +1,33 @@
+environment:
+    
+    stage:
+    
+      GRPCServerAddr: chat:9401
+      
+      websocket_server_addr: chat:9402
+      
+      LogLevel: error
+      
+      database_url: ${DB_STAGE_URL}
+
+    
+    development:
+    
+      GRPCServerAddr: localhost:9401
+      
+      websocket_server_addr: localhost:9402
+      
+      LogLevel: debug
+      
+      database_url: ${DB_DEV_URL}
+    
+    
+    testing:
+    
+      GRPCServerAddr: localhost:9401
+      
+      websocket_server_addr: localhost:9402
+      
+      LogLevel: debug
+      
+      database_url: ${DB_TEST_URL}
