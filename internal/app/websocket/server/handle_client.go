@@ -1,4 +1,4 @@
-package websocketserver
+package server
 
 import (
 	"log/slog"
@@ -7,7 +7,7 @@ import (
 	"golang.org/x/net/context"
 )
 
-func (s *webSocketServer) handleClient(conn *websocket.Conn, clientID uint64) {
+func (s *webSocketServer) handleClient(conn *websocket.Conn, clientID int64) {
 	defer conn.Close()
 	closeCh := make(chan struct{})
 
@@ -24,7 +24,7 @@ func (s *webSocketServer) handleClient(conn *websocket.Conn, clientID uint64) {
 	for {
 		select {
 		case msg := <-s.msgChan:
-			if _, err := s.service.GetMember(context.TODO(), msg.ChatID, clientID); err != nil {
+			if _, err := s.provider.GetMember(context.TODO(), msg.ChatID, clientID); err != nil {
 				// TODO: redirect to notify service
 				continue
 			}

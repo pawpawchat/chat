@@ -32,7 +32,7 @@ func (s *ChatRepository) CreateChat(ctx context.Context, chat *model.Chat) error
 	return s.db.QueryRowContext(ctx, sql, args...).Scan(&chat.ChatID)
 }
 
-func (s *ChatRepository) GetChat(ctx context.Context, chatID uint64) (*model.Chat, error) {
+func (s *ChatRepository) GetChat(ctx context.Context, chatID int64) (*model.Chat, error) {
 	sql, args := squirrel.Select("*").
 		From("chats").
 		Where(squirrel.Eq{"chat_id": chatID}).

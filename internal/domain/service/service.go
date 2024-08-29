@@ -9,18 +9,18 @@ import (
 
 type ChatRepository interface {
 	CreateChat(context.Context, *model.Chat) error
-	GetChat(context.Context, uint64) (*model.Chat, error)
+	GetChat(context.Context, int64) (*model.Chat, error)
 }
 
 type MemberRepository interface {
 	AddMember(context.Context, *model.Member) error
-	GetMember(context.Context, uint64, uint64) (*model.Member, error)
-	GetMembers(context.Context, uint64) (*[]model.Member, error)
+	GetMember(context.Context, int64, int64) (*model.Member, error)
+	GetMembers(context.Context, int64) (*[]model.Member, error)
 }
 
 type MessageRepository interface {
 	SendMessage(context.Context, *model.Message) error
-	GetMessages(context.Context, uint64) (*[]model.Message, error)
+	GetMessages(context.Context, int64) (*[]model.Message, error)
 }
 
 var _ ChatRepository = (*repository.ChatRepository)(nil)

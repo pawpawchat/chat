@@ -1,4 +1,4 @@
-package websocketserver
+package server
 
 import (
 	"log/slog"
@@ -8,7 +8,7 @@ import (
 
 func UpgradeHandler(s *webSocketServer) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		id, err := strconv.ParseUint(r.Header.Get("id"), 10, 64)
+		id, err := strconv.ParseInt(r.Header.Get("id"), 0, 10)
 		if err != nil {
 			http.Error(w, "missing/invalid id", http.StatusBadRequest)
 			return

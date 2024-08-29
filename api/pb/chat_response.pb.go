@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.32.0
 // 	protoc        v3.21.12
-// source: response.proto
+// source: chat_response.proto
 
 package pb
 
@@ -31,7 +31,7 @@ type CreateChatResponse struct {
 func (x *CreateChatResponse) Reset() {
 	*x = CreateChatResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_response_proto_msgTypes[0]
+		mi := &file_chat_response_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -44,7 +44,7 @@ func (x *CreateChatResponse) String() string {
 func (*CreateChatResponse) ProtoMessage() {}
 
 func (x *CreateChatResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[0]
+	mi := &file_chat_response_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57,7 +57,7 @@ func (x *CreateChatResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateChatResponse.ProtoReflect.Descriptor instead.
 func (*CreateChatResponse) Descriptor() ([]byte, []int) {
-	return file_response_proto_rawDescGZIP(), []int{0}
+	return file_chat_response_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *CreateChatResponse) GetChat() *Chat {
@@ -72,13 +72,14 @@ type GetChatResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Chat *Chat `protobuf:"bytes,1,opt,name=chat,proto3" json:"chat,omitempty"`
+	Chat     *Chat      `protobuf:"bytes,1,opt,name=chat,proto3" json:"chat,omitempty"`
+	Messages []*Message `protobuf:"bytes,2,rep,name=messages,proto3" json:"messages,omitempty"`
 }
 
 func (x *GetChatResponse) Reset() {
 	*x = GetChatResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_response_proto_msgTypes[1]
+		mi := &file_chat_response_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -91,7 +92,7 @@ func (x *GetChatResponse) String() string {
 func (*GetChatResponse) ProtoMessage() {}
 
 func (x *GetChatResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[1]
+	mi := &file_chat_response_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -104,12 +105,19 @@ func (x *GetChatResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetChatResponse.ProtoReflect.Descriptor instead.
 func (*GetChatResponse) Descriptor() ([]byte, []int) {
-	return file_response_proto_rawDescGZIP(), []int{1}
+	return file_chat_response_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *GetChatResponse) GetChat() *Chat {
 	if x != nil {
 		return x.Chat
+	}
+	return nil
+}
+
+func (x *GetChatResponse) GetMessages() []*Message {
+	if x != nil {
+		return x.Messages
 	}
 	return nil
 }
@@ -125,7 +133,7 @@ type AddMemberResponse struct {
 func (x *AddMemberResponse) Reset() {
 	*x = AddMemberResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_response_proto_msgTypes[2]
+		mi := &file_chat_response_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -138,7 +146,7 @@ func (x *AddMemberResponse) String() string {
 func (*AddMemberResponse) ProtoMessage() {}
 
 func (x *AddMemberResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[2]
+	mi := &file_chat_response_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -151,7 +159,7 @@ func (x *AddMemberResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddMemberResponse.ProtoReflect.Descriptor instead.
 func (*AddMemberResponse) Descriptor() ([]byte, []int) {
-	return file_response_proto_rawDescGZIP(), []int{2}
+	return file_chat_response_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *AddMemberResponse) GetMember() *Member {
@@ -172,7 +180,7 @@ type SendMessageResponse struct {
 func (x *SendMessageResponse) Reset() {
 	*x = SendMessageResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_response_proto_msgTypes[3]
+		mi := &file_chat_response_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -185,7 +193,7 @@ func (x *SendMessageResponse) String() string {
 func (*SendMessageResponse) ProtoMessage() {}
 
 func (x *SendMessageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[3]
+	mi := &file_chat_response_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -198,7 +206,7 @@ func (x *SendMessageResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendMessageResponse.ProtoReflect.Descriptor instead.
 func (*SendMessageResponse) Descriptor() ([]byte, []int) {
-	return file_response_proto_rawDescGZIP(), []int{3}
+	return file_chat_response_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *SendMessageResponse) GetMessage() *Message {
@@ -213,14 +221,14 @@ type GetMembersResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ChatId  uint64    `protobuf:"varint,1,opt,name=chat_id,json=chatId,proto3" json:"chat_id,omitempty"`
+	ChatId  int64     `protobuf:"varint,1,opt,name=chat_id,json=chatId,proto3" json:"chat_id,omitempty"`
 	Members []*Member `protobuf:"bytes,2,rep,name=members,proto3" json:"members,omitempty"`
 }
 
 func (x *GetMembersResponse) Reset() {
 	*x = GetMembersResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_response_proto_msgTypes[4]
+		mi := &file_chat_response_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -233,7 +241,7 @@ func (x *GetMembersResponse) String() string {
 func (*GetMembersResponse) ProtoMessage() {}
 
 func (x *GetMembersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[4]
+	mi := &file_chat_response_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -246,10 +254,10 @@ func (x *GetMembersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMembersResponse.ProtoReflect.Descriptor instead.
 func (*GetMembersResponse) Descriptor() ([]byte, []int) {
-	return file_response_proto_rawDescGZIP(), []int{4}
+	return file_chat_response_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *GetMembersResponse) GetChatId() uint64 {
+func (x *GetMembersResponse) GetChatId() int64 {
 	if x != nil {
 		return x.ChatId
 	}
@@ -268,14 +276,14 @@ type GetMessagesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ChatId   uint64     `protobuf:"varint,1,opt,name=chat_id,json=chatId,proto3" json:"chat_id,omitempty"`
+	ChatId   int64      `protobuf:"varint,1,opt,name=chat_id,json=chatId,proto3" json:"chat_id,omitempty"`
 	Messages []*Message `protobuf:"bytes,2,rep,name=messages,proto3" json:"messages,omitempty"`
 }
 
 func (x *GetMessagesResponse) Reset() {
 	*x = GetMessagesResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_response_proto_msgTypes[5]
+		mi := &file_chat_response_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -288,7 +296,7 @@ func (x *GetMessagesResponse) String() string {
 func (*GetMessagesResponse) ProtoMessage() {}
 
 func (x *GetMessagesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[5]
+	mi := &file_chat_response_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -301,10 +309,10 @@ func (x *GetMessagesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMessagesResponse.ProtoReflect.Descriptor instead.
 func (*GetMessagesResponse) Descriptor() ([]byte, []int) {
-	return file_response_proto_rawDescGZIP(), []int{5}
+	return file_chat_response_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *GetMessagesResponse) GetChatId() uint64 {
+func (x *GetMessagesResponse) GetChatId() int64 {
 	if x != nil {
 		return x.ChatId
 	}
@@ -318,17 +326,20 @@ func (x *GetMessagesResponse) GetMessages() []*Message {
 	return nil
 }
 
-var File_response_proto protoreflect.FileDescriptor
+var File_chat_response_proto protoreflect.FileDescriptor
 
-var file_response_proto_rawDesc = []byte{
-	0x0a, 0x0e, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x1a, 0x0d, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22,
-	0x2f, 0x0a, 0x12, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x19, 0x0a, 0x04, 0x63, 0x68, 0x61, 0x74, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x05, 0x2e, 0x43, 0x68, 0x61, 0x74, 0x52, 0x04, 0x63, 0x68, 0x61, 0x74,
-	0x22, 0x2c, 0x0a, 0x0f, 0x47, 0x65, 0x74, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x12, 0x19, 0x0a, 0x04, 0x63, 0x68, 0x61, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x05, 0x2e, 0x43, 0x68, 0x61, 0x74, 0x52, 0x04, 0x63, 0x68, 0x61, 0x74, 0x22, 0x34,
+var file_chat_response_proto_rawDesc = []byte{
+	0x0a, 0x13, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x12, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x6d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x2f, 0x0a, 0x12, 0x43, 0x72, 0x65,
+	0x61, 0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x19, 0x0a, 0x04, 0x63, 0x68, 0x61, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x05, 0x2e,
+	0x43, 0x68, 0x61, 0x74, 0x52, 0x04, 0x63, 0x68, 0x61, 0x74, 0x22, 0x52, 0x0a, 0x0f, 0x47, 0x65,
+	0x74, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x19, 0x0a,
+	0x04, 0x63, 0x68, 0x61, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x05, 0x2e, 0x43, 0x68,
+	0x61, 0x74, 0x52, 0x04, 0x63, 0x68, 0x61, 0x74, 0x12, 0x24, 0x0a, 0x08, 0x6d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x08, 0x2e, 0x4d, 0x65, 0x73,
+	0x73, 0x61, 0x67, 0x65, 0x52, 0x08, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x73, 0x22, 0x34,
 	0x0a, 0x11, 0x41, 0x64, 0x64, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f,
 	0x6e, 0x73, 0x65, 0x12, 0x1f, 0x0a, 0x06, 0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x01, 0x20,
 	0x01, 0x28, 0x0b, 0x32, 0x07, 0x2e, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x52, 0x06, 0x6d, 0x65,
@@ -338,12 +349,12 @@ var file_response_proto_rawDesc = []byte{
 	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22,
 	0x50, 0x0a, 0x12, 0x47, 0x65, 0x74, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x52, 0x65, 0x73,
 	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x17, 0x0a, 0x07, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x69, 0x64,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x63, 0x68, 0x61, 0x74, 0x49, 0x64, 0x12, 0x21,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x63, 0x68, 0x61, 0x74, 0x49, 0x64, 0x12, 0x21,
 	0x0a, 0x07, 0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32,
 	0x07, 0x2e, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x52, 0x07, 0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72,
 	0x73, 0x22, 0x54, 0x0a, 0x13, 0x47, 0x65, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x73,
 	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x17, 0x0a, 0x07, 0x63, 0x68, 0x61, 0x74,
-	0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x63, 0x68, 0x61, 0x74, 0x49,
+	0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x63, 0x68, 0x61, 0x74, 0x49,
 	0x64, 0x12, 0x24, 0x0a, 0x08, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x73, 0x18, 0x02, 0x20,
 	0x03, 0x28, 0x0b, 0x32, 0x08, 0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x08, 0x6d,
 	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x73, 0x42, 0x08, 0x5a, 0x06, 0x61, 0x70, 0x69, 0x2f, 0x70,
@@ -351,19 +362,19 @@ var file_response_proto_rawDesc = []byte{
 }
 
 var (
-	file_response_proto_rawDescOnce sync.Once
-	file_response_proto_rawDescData = file_response_proto_rawDesc
+	file_chat_response_proto_rawDescOnce sync.Once
+	file_chat_response_proto_rawDescData = file_chat_response_proto_rawDesc
 )
 
-func file_response_proto_rawDescGZIP() []byte {
-	file_response_proto_rawDescOnce.Do(func() {
-		file_response_proto_rawDescData = protoimpl.X.CompressGZIP(file_response_proto_rawDescData)
+func file_chat_response_proto_rawDescGZIP() []byte {
+	file_chat_response_proto_rawDescOnce.Do(func() {
+		file_chat_response_proto_rawDescData = protoimpl.X.CompressGZIP(file_chat_response_proto_rawDescData)
 	})
-	return file_response_proto_rawDescData
+	return file_chat_response_proto_rawDescData
 }
 
-var file_response_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
-var file_response_proto_goTypes = []interface{}{
+var file_chat_response_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_chat_response_proto_goTypes = []interface{}{
 	(*CreateChatResponse)(nil),  // 0: CreateChatResponse
 	(*GetChatResponse)(nil),     // 1: GetChatResponse
 	(*AddMemberResponse)(nil),   // 2: AddMemberResponse
@@ -371,31 +382,32 @@ var file_response_proto_goTypes = []interface{}{
 	(*GetMembersResponse)(nil),  // 4: GetMembersResponse
 	(*GetMessagesResponse)(nil), // 5: GetMessagesResponse
 	(*Chat)(nil),                // 6: Chat
-	(*Member)(nil),              // 7: Member
-	(*Message)(nil),             // 8: Message
+	(*Message)(nil),             // 7: Message
+	(*Member)(nil),              // 8: Member
 }
-var file_response_proto_depIdxs = []int32{
+var file_chat_response_proto_depIdxs = []int32{
 	6, // 0: CreateChatResponse.chat:type_name -> Chat
 	6, // 1: GetChatResponse.chat:type_name -> Chat
-	7, // 2: AddMemberResponse.member:type_name -> Member
-	8, // 3: SendMessageResponse.message:type_name -> Message
-	7, // 4: GetMembersResponse.members:type_name -> Member
-	8, // 5: GetMessagesResponse.messages:type_name -> Message
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	7, // 2: GetChatResponse.messages:type_name -> Message
+	8, // 3: AddMemberResponse.member:type_name -> Member
+	7, // 4: SendMessageResponse.message:type_name -> Message
+	8, // 5: GetMembersResponse.members:type_name -> Member
+	7, // 6: GetMessagesResponse.messages:type_name -> Message
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
-func init() { file_response_proto_init() }
-func file_response_proto_init() {
-	if File_response_proto != nil {
+func init() { file_chat_response_proto_init() }
+func file_chat_response_proto_init() {
+	if File_chat_response_proto != nil {
 		return
 	}
-	file_message_proto_init()
+	file_chat_message_proto_init()
 	if !protoimpl.UnsafeEnabled {
-		file_response_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_chat_response_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreateChatResponse); i {
 			case 0:
 				return &v.state
@@ -407,7 +419,7 @@ func file_response_proto_init() {
 				return nil
 			}
 		}
-		file_response_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_chat_response_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetChatResponse); i {
 			case 0:
 				return &v.state
@@ -419,7 +431,7 @@ func file_response_proto_init() {
 				return nil
 			}
 		}
-		file_response_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+		file_chat_response_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AddMemberResponse); i {
 			case 0:
 				return &v.state
@@ -431,7 +443,7 @@ func file_response_proto_init() {
 				return nil
 			}
 		}
-		file_response_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_chat_response_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SendMessageResponse); i {
 			case 0:
 				return &v.state
@@ -443,7 +455,7 @@ func file_response_proto_init() {
 				return nil
 			}
 		}
-		file_response_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+		file_chat_response_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetMembersResponse); i {
 			case 0:
 				return &v.state
@@ -455,7 +467,7 @@ func file_response_proto_init() {
 				return nil
 			}
 		}
-		file_response_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+		file_chat_response_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetMessagesResponse); i {
 			case 0:
 				return &v.state
@@ -472,18 +484,18 @@ func file_response_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_response_proto_rawDesc,
+			RawDescriptor: file_chat_response_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_response_proto_goTypes,
-		DependencyIndexes: file_response_proto_depIdxs,
-		MessageInfos:      file_response_proto_msgTypes,
+		GoTypes:           file_chat_response_proto_goTypes,
+		DependencyIndexes: file_chat_response_proto_depIdxs,
+		MessageInfos:      file_chat_response_proto_msgTypes,
 	}.Build()
-	File_response_proto = out.File
-	file_response_proto_rawDesc = nil
-	file_response_proto_goTypes = nil
-	file_response_proto_depIdxs = nil
+	File_chat_response_proto = out.File
+	file_chat_response_proto_rawDesc = nil
+	file_chat_response_proto_goTypes = nil
+	file_chat_response_proto_depIdxs = nil
 }

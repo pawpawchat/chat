@@ -24,7 +24,7 @@ func TestMemberRepository_AddMember(t *testing.T) {
 	}{
 		{
 			"Chat exists, user has not been added",
-			func() *model.Member { member.MemberID = uint64(rand.Int31()); return member },
+			func() *model.Member { member.MemberID = int64(rand.Int31()); return member },
 			true,
 		},
 		{
@@ -64,7 +64,7 @@ func TestMemberRepository_GetMembers(t *testing.T) {
 
 	testCases := []struct {
 		desc   string
-		chatID uint64
+		chatID int64
 		valid  bool
 	}{
 		{
@@ -106,8 +106,8 @@ func TestMemberRepository_GetMember(t *testing.T) {
 
 	testCases := []struct {
 		desc     string
-		chatID   uint64
-		memberID uint64
+		chatID   int64
+		memberID int64
 		valid    bool
 	}{
 		{
