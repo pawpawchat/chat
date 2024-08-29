@@ -2,9 +2,9 @@ environment:
     
     stage:
     
-      GRPCServerAddr: chat:9401
+      GRPCServerAddr: chat:9403
       
-      websocket_server_addr: chat:9402
+      websocket_server_addr: chat:9404
       
       LogLevel: error
       
@@ -13,9 +13,9 @@ environment:
     
     development:
     
-      GRPCServerAddr: localhost:9401
+      GRPCServerAddr: localhost:9403
       
-      websocket_server_addr: localhost:9402
+      websocket_server_addr: localhost:9404
       
       LogLevel: debug
       
@@ -24,9 +24,9 @@ environment:
     
     testing:
     
-      GRPCServerAddr: localhost:9401
+      GRPCServerAddr: localhost:9403
       
-      websocket_server_addr: localhost:9402
+      websocket_server_addr: localhost:9404
       
       LogLevel: debug
       

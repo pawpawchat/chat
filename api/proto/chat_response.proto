@@ -1,7 +1,7 @@
 syntax = "proto3";
 option go_package = "api/pb";
 
-import "message.proto";
+import "chat_message.proto";
 
 
 message CreateChatResponse {
@@ -11,6 +11,7 @@ message CreateChatResponse {
 
 message GetChatResponse {
     Chat chat = 1;
+    repeated Message messages = 2;
 }
 
 
@@ -25,12 +26,12 @@ message SendMessageResponse {
 
 
 message GetMembersResponse {
-    uint64 chat_id = 1;
+    int64 chat_id = 1;
     repeated Member members = 2;
 }
 
 
 message GetMessagesResponse {
-    uint64 chat_id = 1;
+    int64 chat_id = 1;
     repeated Message messages = 2;
 }

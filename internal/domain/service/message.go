@@ -15,6 +15,6 @@ func (s *Service) SendMessage(ctx context.Context, msg *model.Message) error {
 	return nil
 }
 
-func (s *Service) GetMessages(ctx context.Context, chatID uint64) (*[]model.Message, error) {
+func (s *Service) GetMessages(ctx context.Context, chatID int64) (*[]model.Message, error) {
 	return s.msgRepo.GetMessages(ctx, chatID)
 }

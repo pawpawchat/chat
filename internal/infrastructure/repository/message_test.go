@@ -66,7 +66,7 @@ func TestMessageRepository_GetMessages(t *testing.T) {
 
 	testCases := []struct {
 		desc   string
-		chatID uint64
+		chatID int64
 		valid  bool
 	}{
 		{

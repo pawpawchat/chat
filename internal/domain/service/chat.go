@@ -15,6 +15,6 @@ func (s *Service) CreateChat(ctx context.Context, owner *model.Member, chat *mod
 	return s.memberRepo.AddMember(ctx, owner)
 }
 
-func (s *Service) GetChat(ctx context.Context, chatID uint64) (*model.Chat, error) {
+func (s *Service) GetChat(ctx context.Context, chatID int64) (*model.Chat, error) {
 	return s.chatRepo.GetChat(ctx, chatID)
 }

@@ -12,8 +12,8 @@ import (
 	"github.com/pawpawchat/chat/internal/infrastructure/repository"
 
 	_ "github.com/jackc/pgx/v5/stdlib"
-	gs "github.com/pawpawchat/chat/internal/app/grpc_server"
-	ws "github.com/pawpawchat/chat/internal/app/websocket_server"
+	gs "github.com/pawpawchat/chat/internal/app/grpc/server"
+	ws "github.com/pawpawchat/chat/internal/app/websocket/server"
 )
 
 func Run(ctx context.Context, config *config.Config) {

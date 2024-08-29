@@ -27,7 +27,7 @@ func (s *MemberRepository) AddMember(ctx context.Context, member *model.Member) 
 	return err
 }
 
-func (s *MemberRepository) GetMembers(ctx context.Context, chatID uint64) (*[]model.Member, error) {
+func (s *MemberRepository) GetMembers(ctx context.Context, chatID int64) (*[]model.Member, error) {
 	sql, args := squirrel.Select("*").
 		From("chat_members").
 		Where(squirrel.Eq{"chat_id": chatID}).
@@ -38,7 +38,7 @@ func (s *MemberRepository) GetMembers(ctx context.Context, chatID uint64) (*[]mo
 	return members, s.db.SelectContext(ctx, members, sql, args...)
 }
 
-func (s *MemberRepository) GetMember(ctx context.Context, chatID uint64, memberID uint64) (*model.Member, error) {
+func (s *MemberRepository) GetMember(ctx context.Context, chatID int64, memberID int64) (*model.Member, error) {
 	sql, args := squirrel.Select("*").
 		From("chat_members").
 		Where(squirrel.Eq{"chat_id": chatID, "member_id": memberID}).
