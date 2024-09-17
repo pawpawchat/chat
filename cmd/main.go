@@ -12,9 +12,15 @@ import (
 	"github.com/pawpawchat/chat/internal/app"
 )
 
+var cfg *string
+
+func init() {
+	cfg = flag.String("cfg", "config.yaml", "path to config file")
+}
+
 func main() {
 	flag.Parse()
-	cfg, err := config.LoadDefaultConfig()
+	cfg, err := config.LoadConfig(*cfg)
 	if err != nil {
 		log.Fatal(err)
 	}

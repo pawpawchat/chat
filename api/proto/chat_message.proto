@@ -31,8 +31,4 @@ message Member {
 }
 
 
-// message MessageReaders {
-//     int64 message_id = 1;
-//     repeated int64 reader_id = 2;
-// }
 

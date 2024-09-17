@@ -3,33 +3,37 @@ option go_package = "api/pb";
 
 import "chat_message.proto";
 
+// chats
 
 message CreateChatResponse {
     Chat chat = 1;
 }
-
 
 message GetChatResponse {
     Chat chat = 1;
     repeated Message messages = 2;
 }
 
+message GetAllChatsResponse {
+    repeated Chat chats = 1;
+}
+
+// members
 
 message AddMemberResponse {
     Member member = 1;
 }
-
-
-message SendMessageResponse {
-    Message message = 1;
-}
-
 
 message GetMembersResponse {
     int64 chat_id = 1;
     repeated Member members = 2;
 }
 
+// messages
+
+message SendMessageResponse {
+    Message message = 1;
+}
 
 message GetMessagesResponse {
     int64 chat_id = 1;
