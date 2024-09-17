@@ -27,12 +27,12 @@ func (r *MessageRepository) SendMessage(ctx context.Context, msg *model.Message)
 	return err
 }
 
-func (r *MessageRepository) GetMessages(ctx context.Context, chatID int64) (*[]model.Message, error) {
+func (r *MessageRepository) GetMessages(ctx context.Context, chatID int64) ([]*model.Message, error) {
 	sql, args := squirrel.Select("*").
 		From("messages").Where(squirrel.Eq{"chat_id": chatID}).
 		PlaceholderFormat(squirrel.Dollar).
 		MustSql()
 
-	msgs := new([]model.Message)
-	return msgs, r.db.SelectContext(ctx, msgs, sql, args...)
+	var msgs []*model.Message
+	return msgs, r.db.SelectContext(ctx, &msgs, sql, args...)
 }

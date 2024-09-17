@@ -11,6 +11,7 @@ import (
 type chatProvider interface {
 	CreateChat(context.Context, *model.Member, *model.Chat) error
 	GetChat(context.Context, int64) (*model.Chat, error)
+	GetAllChats(context.Context, int64) ([]*model.Chat, error)
 }
 
 func CreateChatAdapter(ctx context.Context, provider chatProvider, req *pb.CreateChatRequest) (*pb.CreateChatResponse, error) {
@@ -56,9 +57,25 @@ func GetChatAdapter(ctx context.Context, provider chatProvider, req *pb.GetChatR
 	}
 
 	var messagespb []*pb.Message = make([]*pb.Message, 0)
-	for _, m := range *messages {
+	for _, m := range messages {
 		messagespb = append(messagespb, m.ToPb())
 	}
 
 	return &pb.GetChatResponse{Chat: chat.ToPb(), Messages: messagespb}, nil
+}
+
+func GetAllChatsAdapter(ctx context.Context, provider chatProvider, req *pb.GetAllChatsRequest) (*pb.GetAllChatsResponse, error) {
+	profileID := req.ProfileId
+
+	chats, err := provider.GetAllChats(ctx, profileID)
+	if err != nil {
+		return nil, err
+	}
+
+	var chatsPb []*pb.Chat = make([]*pb.Chat, 0)
+	for _, chat := range chats {
+		chatsPb = append(chatsPb, chat.ToPb())
+	}
+
+	return &pb.GetAllChatsResponse{Chats: chatsPb}, nil
 }

@@ -30,9 +30,9 @@ func Run(ctx context.Context, service profileService, msgChan chan *model.Messag
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		slog.Debug("running a grpc server", "addr", addr)
+		slog.Debug("chat: grpc server startup", "addr", addr)
 		if err := grpcSrv.Serve(lsn); err != nil {
-			slog.Error("grpc server", "error", err)
+			slog.Error("chat: grpc server", "error", err)
 		}
 	}()
 
@@ -41,7 +41,7 @@ func Run(ctx context.Context, service profileService, msgChan chan *model.Messag
 		wg.Done()
 		<-ctx.Done()
 		grpcSrv.GracefulStop()
-		slog.Debug("the grpc server has been gracefully shut down")
+		slog.Debug("chat: grpc server has been gracefully shut down")
 	}()
 
 	wg.Wait()

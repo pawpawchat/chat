@@ -18,3 +18,7 @@ func (s *Service) CreateChat(ctx context.Context, owner *model.Member, chat *mod
 func (s *Service) GetChat(ctx context.Context, chatID int64) (*model.Chat, error) {
 	return s.chatRepo.GetChat(ctx, chatID)
 }
+
+func (s *Service) GetAllChats(ctx context.Context, profileID int64) ([]*model.Chat, error) {
+	return s.chatRepo.GetAllChats(ctx, profileID)
+}

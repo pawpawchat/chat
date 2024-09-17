@@ -10,7 +10,7 @@ import (
 
 type messageProvider interface {
 	SendMessage(context.Context, *model.Message) error
-	GetMessages(context.Context, int64) (*[]model.Message, error)
+	GetMessages(context.Context, int64) ([]*model.Message, error)
 }
 
 func SendMessageAdapter(ctx context.Context, provider messageProvider, req *pb.SendMessageRequest) (*pb.SendMessageResponse, error) {
@@ -47,7 +47,7 @@ func GetMessagesAdapter(ctx context.Context, provider messageProvider, req *pb.G
 
 	messagespb := make([]*pb.Message, 0)
 
-	for _, m := range *messages {
+	for _, m := range messages {
 		messagespb = append(messagespb, m.ToPb())
 	}
 

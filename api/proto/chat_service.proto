@@ -9,6 +9,8 @@ service ChatService {
     rpc CreateChat(CreateChatRequest) returns (CreateChatResponse);
 
     rpc GetChat(GetChatRequest) returns (GetChatResponse);
+
+    rpc GetAllChats(GetAllChatsRequest) returns (GetAllChatsResponse);
     
     rpc AddMember(AddMemberRequest) returns (AddMemberResponse);
 

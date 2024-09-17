@@ -9,7 +9,7 @@ import (
 
 type memberProvider interface {
 	AddMember(context.Context, *model.Member) error
-	GetMembers(context.Context, int64) (*[]model.Member, error)
+	GetMembers(context.Context, int64) ([]*model.Member, error)
 }
 
 func AddMemberAdapter(ctx context.Context, provider memberProvider, req *pb.AddMemberRequest) (*pb.AddMemberResponse, error) {
@@ -37,7 +37,7 @@ func GetMembersAdapater(ctx context.Context, provider memberProvider, req *pb.Ge
 
 	pbmembers := make([]*pb.Member, 0)
 
-	for _, m := range *members {
+	for _, m := range members {
 		pbmembers = append(pbmembers, &pb.Member{
 			MemberId: m.MemberID,
 			Username: m.Username,

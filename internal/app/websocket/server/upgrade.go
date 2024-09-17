@@ -16,11 +16,11 @@ func UpgradeHandler(s *webSocketServer) http.HandlerFunc {
 
 		conn, err := s.upgrader.Upgrade(w, r, nil)
 		if err != nil {
-			slog.Debug("upgrade:", "err", err)
+			slog.Debug("chat: upgrade:", "err", err)
 			return
 		}
 
-		slog.Debug("new connection", "id", id)
+		slog.Debug("chat: new connection", "id", id)
 		go s.handleClient(conn, id)
 	}
 }

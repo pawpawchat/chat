@@ -2,6 +2,7 @@ package server
 
 import (
 	"log/slog"
+	"net/http"
 	"sync"
 	"time"
 
@@ -17,9 +18,9 @@ func Run(ctx context.Context, provider chatMembersProvider, msgChan chan *model.
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		slog.Debug("running a websocket server", "addr", Addr)
-		if err := srv.httpServer.ListenAndServe(); err != nil {
-			slog.Error("http server", "error", err)
+		slog.Debug("chat: websocket server startup", "addr", Addr)
+		if err := srv.httpServer.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			slog.Error("chat: websocket server", "error", err)
 		}
 	}()
 
@@ -32,9 +33,9 @@ func Run(ctx context.Context, provider chatMembersProvider, msgChan chan *model.
 		defer cancel()
 
 		if err := srv.httpServer.Shutdown(ctx); err != nil {
-			slog.Error("shutdown", "error", err)
+			slog.Error("chat: weboscket server shutdown", "error", err)
 		}
-		slog.Debug("the websocket server has been gracefully shut down")
+		slog.Debug("chat: websocket server has been gracefully shutdown")
 	}()
 
 	wg.Wait()

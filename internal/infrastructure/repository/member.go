@@ -27,15 +27,15 @@ func (s *MemberRepository) AddMember(ctx context.Context, member *model.Member) 
 	return err
 }
 
-func (s *MemberRepository) GetMembers(ctx context.Context, chatID int64) (*[]model.Member, error) {
+func (s *MemberRepository) GetMembers(ctx context.Context, chatID int64) ([]*model.Member, error) {
 	sql, args := squirrel.Select("*").
 		From("chat_members").
 		Where(squirrel.Eq{"chat_id": chatID}).
 		PlaceholderFormat(squirrel.Dollar).
 		MustSql()
 
-	members := new([]model.Member)
-	return members, s.db.SelectContext(ctx, members, sql, args...)
+	var members []*model.Member
+	return members, s.db.SelectContext(ctx, &members, sql, args...)
 }
 
 func (s *MemberRepository) GetMember(ctx context.Context, chatID int64, memberID int64) (*model.Member, error) {

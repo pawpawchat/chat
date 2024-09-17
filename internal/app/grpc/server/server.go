@@ -12,12 +12,13 @@ import (
 type profileService interface {
 	CreateChat(context.Context, *model.Member, *model.Chat) error
 	GetChat(context.Context, int64) (*model.Chat, error)
+	GetAllChats(context.Context, int64) ([]*model.Chat, error)
 
 	AddMember(context.Context, *model.Member) error
-	GetMembers(context.Context, int64) (*[]model.Member, error)
+	GetMembers(context.Context, int64) ([]*model.Member, error)
 
 	SendMessage(context.Context, *model.Message) error
-	GetMessages(context.Context, int64) (*[]model.Message, error)
+	GetMessages(context.Context, int64) ([]*model.Message, error)
 }
 
 var _ profileService = (*service.Service)(nil)
@@ -37,6 +38,10 @@ func (s *ChatGRPCServer) CreateChat(ctx context.Context, req *pb.CreateChatReque
 
 func (s *ChatGRPCServer) GetChat(ctx context.Context, req *pb.GetChatRequest) (*pb.GetChatResponse, error) {
 	return adapter.GetChatAdapter(ctx, s.service, req)
+}
+
+func (s *ChatGRPCServer) GetAllChats(ctx context.Context, req *pb.GetAllChatsRequest) (*pb.GetAllChatsResponse, error) {
+	return adapter.GetAllChatsAdapter(ctx, s.service, req)
 }
 
 func (s *ChatGRPCServer) AddMember(ctx context.Context, req *pb.AddMemberRequest) (*pb.AddMemberResponse, error) {
