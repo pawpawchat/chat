@@ -82,6 +82,9 @@ func TestMessageRepository_GetMessages(t *testing.T) {
 	}
 
 	mr := repository.NewMessageRepository(db)
+	msg := testMessage()
+	msg.ChatID = chat.ChatID
+	mr.SendMessage(context.Background(), msg)
 
 	for _, tc := range testCases {
 		t.Run(tc.desc, func(t *testing.T) {
